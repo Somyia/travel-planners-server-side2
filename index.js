@@ -82,6 +82,20 @@ async function run() {
             console.log(result);
             res.json(result)
         })
+        //get share story
+        app.get('/stories', async (req, res) => {
+            const story = await storyCollection.find({});
+            const ShareStory = await story.toArray();
+            res.send(ShareStory)
+        })
+
+        //post share story
+        app.post('/stories', async (req, res) => {
+            const story = req.body;
+            const result = await storyCollection.insertOne(story);
+            console.log(result);
+            res.json(result)
+        })
 
         // query for movies that have a runtime less than 15 minutes
         // const query = { runtime: { $lt: 15 } };
